@@ -1,9 +1,11 @@
+package macowins;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class Settlement {
 
-    private Map <Integer,Items> items = new HashMap<>();;
+    private Map <Integer, Items> items = new HashMap<>();;
     private static Calculate calculate;
     private static Settlement instance = null;
 
