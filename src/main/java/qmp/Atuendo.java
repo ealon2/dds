@@ -22,9 +22,7 @@ public class Atuendo implements Observable{
 
     @Override
     public void inform(){
-        for (int i=0;i < this.prendas.size();i++){
-
-        }
+        prendas.stream().forEach(x->x.update());
     }
 }
 
