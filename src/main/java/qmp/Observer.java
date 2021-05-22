@@ -1,5 +1,5 @@
 package qmp;
 
 public interface Observer {
-    void update();
+    void update(Mensaje mensaje);
 }

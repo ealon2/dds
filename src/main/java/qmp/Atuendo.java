@@ -22,7 +22,8 @@ public class Atuendo implements Observable{
 
     @Override
     public void inform(){
-        prendas.stream().forEach(x->x.update());
+        prendas.stream().forEach(x->x.update(new Mensaje() {
+        }));
     }
 }
 

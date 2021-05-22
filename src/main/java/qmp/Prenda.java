@@ -2,6 +2,8 @@ package qmp;
 
 import org.w3c.dom.css.RGBColor;
 
+import static java.util.Objects.requireNonNull;
+
 public class Prenda implements Observer{
 
     private RGBColor color;
@@ -10,16 +12,16 @@ public class Prenda implements Observer{
     private RGBColor colorSecundario;
 
     public Prenda (RGBColor color, Material material, TipoDePrenda tipoDePrenda){
-        this.color = color;
-        this.material = material;
-        this.tipoDePrenda = tipoDePrenda;
+        this.tipoDePrenda = requireNonNull(tipoDePrenda, "tipo de prenda es obligatorio");
+        this.material = requireNonNull(material, "material es obligatorio");
+        this.color = requireNonNull(color, "color es obligatorio");
     }
 
     public Prenda (RGBColor color,RGBColor colorSecundario, Material material, TipoDePrenda tipoDePrenda){
-        this.color = color;
-        this.material = material;
-        this.tipoDePrenda = tipoDePrenda;
-        this.colorSecundario = colorSecundario;
+        this.tipoDePrenda = requireNonNull(tipoDePrenda, "tipo de prenda es obligatorio");
+        this.material = requireNonNull(material, "material es obligatorio");
+        this.color = requireNonNull(color, "color es obligatorio");
+        this.colorSecundario = requireNonNull(colorSecundario, "color secundario es obligatorio");
     }
 
     public Categoria getCategoria(){
@@ -27,7 +29,7 @@ public class Prenda implements Observer{
     }
 
     @Override
-    public void update() {
+    public void update(Mensaje mensaje) {
         System.out.println("mensaje leido por Prenda");
     }
 
