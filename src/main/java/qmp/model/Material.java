@@ -1,4 +1,4 @@
-package qmp;
+package qmp.model;
 
 public enum Material {
     ALGODON

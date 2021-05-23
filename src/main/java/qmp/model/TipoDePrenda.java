@@ -1,4 +1,6 @@
-package qmp;
+package qmp.model;
+
+import qmp.model.Categoria;
 
 //TODO Agregar la validacion de Categoria en las clases hijas (hook)
 //TODO Revisar si se puede emplear un Abstract Method

@@ -1,10 +1,10 @@
-package qmp;
+package qmp.model;
 
 import org.w3c.dom.css.RGBColor;
 
 import static java.util.Objects.requireNonNull;
 
-public class Prenda implements Observer{
+public class Prenda{
 
     private RGBColor color;
     private Material material;
@@ -26,11 +26,6 @@ public class Prenda implements Observer{
 
     public Categoria getCategoria(){
         return this.tipoDePrenda.getCategoria();
-    }
-
-    @Override
-    public void update(Mensaje mensaje) {
-        System.out.println("mensaje leido por Prenda");
     }
 
 }
