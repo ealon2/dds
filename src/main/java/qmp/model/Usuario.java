@@ -1,33 +1,31 @@
 package qmp.model;
 
-import qmp.model.Observer;
-import qmp.model.Prenda;
-import qmp.model.Sugerencias;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class Usuario implements Observer {
 
-    private Sugerencias sugerencias;
+    private Atuendo atuendo;
     private String ciudad;
+    private UUID id;
+
+
+    private List<Guardarropa> guardarropas;
 
     //recibo una referencia a Atuendo
-    Usuario(Sugerencias sugerencias, String ciudad){
-        this.sugerencias = sugerencias;
+    Usuario(@JsonProperty("ciudad") String ciudad, Atuendo atuendo){
+        this.id =UUID.randomUUID();
         this.ciudad = ciudad;
+        this.atuendo = atuendo;
+        this.guardarropas = new ArrayList<Guardarropa>();
     }
 
-    //Me inscribo a sugerencias
-    public void addPrenda(Prenda prenda){
-        sugerencias.add(this);
+    public List<Guardarropa> getGuardarropas() {
+        return guardarropas;
     }
-
-    //Me desinscribo a sugerencias
-    public void removePrenda(Prenda prenda){
-        //todo: debiera validar primero que existe prendas ya generadas
-        sugerencias.remove(this);
-    }
-
     public String getCiudad() {
         return ciudad;
     }
@@ -37,5 +35,7 @@ public class Usuario implements Observer {
         //todo: Los usuarios deben recibir sugerencias
     }
 
-
+    public void agregrarGuardarropa(Guardarropa guardarropa) {
+        this.guardarropas.add(guardarropa);
+    }
 }

@@ -2,12 +2,12 @@ package qmp;
 
 import org.junit.Before;
 import org.junit.Test;
-import qmp.model.Sugerencias;
+import qmp.model.Atuendo;
 
 
 public class AtuendoTest{
 
-    private Sugerencias sugerencias;
+    private Atuendo atuendo;
 
     @Before
     public void setUp() throws Exception{

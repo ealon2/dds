@@ -3,9 +3,9 @@ package qmp.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Sugerencias implements Observable {
+public class Atuendo implements Observable {
 
-    private List<Usuario> usuarios;
+    private final List<Usuario> usuarios;
     private Clima clima;
     public EstadoClima getClima(String ciudad) {
         return clima.getWeather(ciudad);
@@ -15,7 +15,7 @@ public class Sugerencias implements Observable {
         return new ArrayList<Prenda>();
     }
 
-    public Sugerencias(){
+    public Atuendo(){
         this.usuarios = new ArrayList<Usuario>();
     }
 
@@ -28,6 +28,11 @@ public class Sugerencias implements Observable {
     @Override
     public void remove(Usuario usuario) {
         this.usuarios.remove(usuario);
+    }
+
+    @Override
+    public void compartirCon(Usuario usuario, List<Prenda> guardarropa) {
+
     }
 
     private void inform(){
