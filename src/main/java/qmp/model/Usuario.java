@@ -57,6 +57,15 @@ public class Usuario implements Observer {
 
     /**
      *
+     * @param sugerencia
+     */
+    public void rechazarSugerencia(@NotNull SugerenciaCommand sugerencia){
+       this.sugerencias.remove(sugerencia);
+    }
+
+
+    /**
+     *
      * @param usuario
      * @param guardarropa
      */
