@@ -1,50 +1,34 @@
 package qmp.model;
 
+import com.sun.istack.internal.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author ealon2
+ * @version 1.0
+ * @throws RuntimeException Se lanza esta excepcion ante cualquier eventual error.
+ */
 public class Guardarropa {
 
-    List<Prenda> prendas;
-    Solicitud solicitud;
-    TipoGuardarropa tipo;
+    private List<Prenda> prendas; // listado de prendas aceptadas
+    private String criterio; // Criterio del guardarropa
 
-    public Guardarropa(TipoGuardarropa tipo){
-        this.tipo=tipo;
-        this.prendas = new ArrayList<>();
-        this.solicitudes = new ArrayList<Solicitud>();
-
+    public Guardarropa(@NotNull String criterio){
+        this.criterio = criterio;
+        this.prendas = new ArrayList<Prenda>();
     }
 
-    public void agregarPrenda(Prenda prenda){
-        prendas.add(prenda);
+    public void agregarPrenda(Prenda prenda) {
+        this.prendas.add(prenda);
     }
 
-    public void quitarPrenda(Prenda prenda){
-        if (!prendas.contains(prenda)) throw new RuntimeException("no existe la prenda que se desea quitar");
-        prendas.remove(prenda);
+    public void quitarPrenda(Prenda prenda) {
+        this.prendas.remove(prenda);
     }
 
-    public void compartirCon(Usuario usuario){
-        usuario.agregrarGuardarropa(this);
+    public List<Prenda> getPrendas(){
+        return prendas;
     }
-
-    public void proponerQuitarPrenda(Prenda prenda){
-        if (!this.prendas.contains(prenda)) throw new RuntimeException("la prenda no esta en la lista actual");
-        this.prendasPendienteQuitar.add(prenda);
-    }
-
-    public void proponerAgregarPrenda(Prenda prenda){
-        if (this.prendas.contains(prenda)) throw new RuntimeException("la prenda ya esta en la lista actual");
-        this.prendasPendienteAgregar.add(prenda);
-    }
-
-    public List<Prenda> getPrendasPendienteAgregar() {
-        return prendasPendienteAgregar;
-    }
-
-    public List<Prenda> getPrendasPendienteQuitar() {
-        return prendasPendienteQuitar;
-    }
-
 }

@@ -1,41 +1,79 @@
 package qmp.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.sun.istack.internal.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 public class Usuario implements Observer {
 
-    private Atuendo atuendo;
     private String ciudad;
-    private UUID id;
-
-
     private List<Guardarropa> guardarropas;
+    private List<SugerenciaCommand> sugerencias;
 
-    //recibo una referencia a Atuendo
-    Usuario(@JsonProperty("ciudad") String ciudad, Atuendo atuendo){
-        this.id =UUID.randomUUID();
+    /**
+     *
+     * @param ciudad
+     */
+    Usuario(@JsonProperty("ciudad") String ciudad){
         this.ciudad = ciudad;
-        this.atuendo = atuendo;
         this.guardarropas = new ArrayList<Guardarropa>();
+        this.sugerencias = new ArrayList<SugerenciaCommand>();
+    }
+
+    /**
+     *
+     * @param sugerencia
+     */
+    @Override
+    public void escucharSugerencias(@NotNull SugerenciaCommand sugerencia) {
+        this.sugerencias.add(sugerencia);
+    }
+
+    /**
+     *
+     * @param guardarropa
+     */
+    public void agregrarGuardarropa(@NotNull Guardarropa guardarropa) {
+        this.guardarropas.add(guardarropa);
+    }
+
+    /**
+     *
+     * @param sugerencia
+     */
+    public void ejecutarSugerencia(@NotNull SugerenciaCommand sugerencia){
+        sugerencia.execute();
+    }
+
+    /**
+     *
+     * @param sugerencia
+     */
+    public void reversarSugerencia(@NotNull SugerenciaCommand sugerencia){
+        sugerencia.unexecute();
+    }
+
+    /**
+     *
+     * @param usuario
+     * @param guardarropa
+     */
+    public void compartirCon(@NotNull Usuario usuario, @NotNull Guardarropa guardarropa){
+        usuario.agregrarGuardarropa(guardarropa);
     }
 
     public List<Guardarropa> getGuardarropas() {
         return guardarropas;
     }
+
     public String getCiudad() {
         return ciudad;
     }
 
-    @Override
-    public void update(List<Prenda> sugerencias) {
-        //todo: Los usuarios deben recibir sugerencias
+    public List<SugerenciaCommand> getSugerencias(){
+        return sugerencias;
     }
 
-    public void agregrarGuardarropa(Guardarropa guardarropa) {
-        this.guardarropas.add(guardarropa);
-    }
 }

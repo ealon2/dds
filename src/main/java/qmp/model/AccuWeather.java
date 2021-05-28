@@ -13,6 +13,6 @@ public class AccuWeather implements Clima {
     @Override
     public EstadoClima getWeather(String city) {
         condicionesClimaticas = apiClima.getWeather(city);
-        return (EstadoClima) condicionesClimaticas.get(0).get("PrecipitationProbability"); //Devuelve un número del 0 al 1
+        return (EstadoClima) condicionesClimaticas.get(0).get("PrecipitationProbability");
     }
 }

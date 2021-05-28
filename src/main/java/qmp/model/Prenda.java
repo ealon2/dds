@@ -11,6 +11,9 @@ public class Prenda{
     private TipoDePrenda tipoDePrenda;
     private RGBColor colorSecundario;
 
+    public Prenda(){
+
+    }
     public Prenda (RGBColor color, Material material, TipoDePrenda tipoDePrenda){
         this.tipoDePrenda = requireNonNull(tipoDePrenda, "tipo de prenda es obligatorio");
         this.material = requireNonNull(material, "material es obligatorio");

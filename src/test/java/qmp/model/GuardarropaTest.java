@@ -7,9 +7,7 @@ import org.mockito.Mock;
 
 public class GuardarropaTest {
 
-    private Guardarropa guardarropaViaje;
-    private Guardarropa guardarropaEntrecasa;
-    private Guardarropa guardarropaOtro;
+    private Guardarropa guardarropa;
     private Usuario usuario;
     private Usuario usuarioCompartido;
 
@@ -18,29 +16,81 @@ public class GuardarropaTest {
 
     @BeforeEach
     public void setUp(){
-        guardarropaOtro=new Guardarropa(TipoGuardarropa.OTRO);
-        guardarropaViaje=new Guardarropa(TipoGuardarropa.VIAJE);
-        guardarropaEntrecasa=new Guardarropa(TipoGuardarropa.ENTRECASA);
-        usuario= new Usuario("Buenos Aires",new Atuendo());
-        usuarioCompartido= new Usuario("Buenos Aires",new Atuendo());
+        guardarropa =new Guardarropa("Entrecasa");
+        usuario= new Usuario("Buenos Aires");
+        usuarioCompartido= new Usuario("Buenos Aires");
     }
 
     @Test
     public void agregarPrendaEnGuardarropaTest(){
-        this.guardarropaOtro.agregarPrenda(prenda);
+        this.guardarropa.agregarPrenda(prenda);
     }
 
     @Test
     public void quitarPrendaEnGuardarropaTest(){
-        this.guardarropaOtro.quitarPrenda(prenda);
+        this.guardarropa.quitarPrenda(prenda);
     }
 
     @Test
     public void compartirGuardarropa(){
+
+        usuario.agregrarGuardarropa(guardarropa);
         Assert.assertTrue(usuarioCompartido.getGuardarropas().isEmpty());
-        this.guardarropaOtro.compartirCon(usuarioCompartido);
-        Assert.assertTrue(usuarioCompartido.getGuardarropas().contains(guardarropaOtro));
+        usuario.compartirCon(usuarioCompartido,guardarropa);
+        Assert.assertTrue(usuarioCompartido.getGuardarropas().contains(guardarropa));
     }
 
+    @Test
+    public void revisarSugerencias(){
 
+    }
+
+    @Test
+    public void aceptarSugerencias(){
+
+        Prenda prenda = new Prenda();
+
+        Assert.assertTrue(usuario.getGuardarropas().isEmpty());
+
+        //Agrego un guardarropas al usuario
+        usuario.agregrarGuardarropa(guardarropa);
+
+        // al ejecutar la sugerencia se debe guardar en el guardarropa
+        usuario.ejecutarSugerencia(new AgregarPrenda(prenda,guardarropa));
+
+        // valido
+        Assert.assertEquals(usuario.getGuardarropas().get(0).getPrendas().get(0) ,prenda);
+        Assert.assertFalse(usuario.getGuardarropas().get(0).getPrendas().isEmpty());
+    }
+
+    @Test
+    public void rechazarSugerencias(){
+
+    }
+
+    @Test
+    public void deshacerSugerencias(){
+        Prenda prenda = new Prenda();
+        AgregarPrenda sugerencia = new AgregarPrenda(prenda,guardarropa);
+
+        // No tiene asignado guardarropa el usuario
+        Assert.assertTrue(usuario.getGuardarropas().isEmpty());
+
+        //Agrego un guardarropas vacio al usuario
+        usuario.agregrarGuardarropa(guardarropa);
+
+        //Valido que el guardarropa esta vacio
+        Assert.assertTrue(usuario.getGuardarropas().get(0).getPrendas().isEmpty());
+
+        usuario.ejecutarSugerencia(sugerencia);
+
+        //Valido que el guardarropa tiene una prenda
+        Assert.assertEquals(usuario.getGuardarropas().get(0).getPrendas().get(0) ,prenda);
+
+        usuario.reversarSugerencia(sugerencia);
+
+        // Valido que esta de nuevo vacio
+        Assert.assertTrue(usuario.getGuardarropas().get(0).getPrendas().isEmpty());
+
+    }
 }
