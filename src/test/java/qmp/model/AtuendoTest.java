@@ -1,7 +1,7 @@
 package qmp.model;
-
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import qmp.model.Atuendo;
 
 
@@ -9,7 +9,7 @@ public class AtuendoTest{
 
     private Atuendo atuendo;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception{
         //atuendo = new Atuendo(new ArrayList<Observer>());
     }

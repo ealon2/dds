@@ -1,9 +1,7 @@
 package qmp.model;
-
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 
 public class GuardarropaTest {
 
@@ -11,8 +9,6 @@ public class GuardarropaTest {
     private Usuario usuario;
     private Usuario usuarioCompartido;
     private SugerenciaCommand sugerenciaAlta;
-
-    @Mock
     private Prenda prenda;
 
 
@@ -21,6 +17,7 @@ public class GuardarropaTest {
         guardarropa =new Guardarropa("Entrecasa");
         usuario= new Usuario("Buenos Aires");
         usuarioCompartido= new Usuario("Buenos Aires");
+        prenda = new Prenda();
         sugerenciaAlta = new AgregarPrenda(prenda,guardarropa);
     }
 
@@ -38,15 +35,15 @@ public class GuardarropaTest {
     public void compartirGuardarropa(){
 
         usuario.agregrarGuardarropa(guardarropa);
-        Assert.assertTrue(usuarioCompartido.getGuardarropas().isEmpty());
+        Assertions.assertTrue(usuarioCompartido.getGuardarropas().isEmpty());
         usuario.compartirCon(usuarioCompartido,guardarropa);
-        Assert.assertTrue(usuarioCompartido.getGuardarropas().contains(guardarropa));
+        Assertions.assertTrue(usuarioCompartido.getGuardarropas().contains(guardarropa));
     }
 
     @Test
     public void aceptarSugerencias(){
 
-        Assert.assertTrue(usuario.getGuardarropas().isEmpty());
+        Assertions.assertTrue(usuario.getGuardarropas().isEmpty());
 
         //Agrego un guardarropas al usuario
         usuario.agregrarGuardarropa(guardarropa);
@@ -55,39 +52,39 @@ public class GuardarropaTest {
         usuario.ejecutarSugerencia(sugerenciaAlta);
 
         // valido
-        Assert.assertEquals(usuario.getGuardarropas().get(0).getPrendas().get(0) ,prenda);
-        Assert.assertFalse(usuario.getGuardarropas().get(0).getPrendas().isEmpty());
+        Assertions.assertEquals(usuario.getGuardarropas().get(0).getPrendas().get(0) ,prenda);
+        Assertions.assertFalse(usuario.getGuardarropas().get(0).getPrendas().isEmpty());
     }
 
     @Test
     public void rechazarSugerencias(){
 
-        Assert.assertTrue(usuario.getSugerencias().isEmpty());
+        Assertions.assertTrue(usuario.getSugerencias().isEmpty());
         usuario.escucharSugerencias(sugerenciaAlta);
-        Assert.assertFalse(usuario.getSugerencias().isEmpty());
+        Assertions.assertFalse(usuario.getSugerencias().isEmpty());
     }
 
     @Test
     public void deshacerSugerencias(){
 
         // No tiene asignado guardarropa el usuario
-        Assert.assertTrue(usuario.getGuardarropas().isEmpty());
+        Assertions.assertTrue(usuario.getGuardarropas().isEmpty());
 
         //Agrego un guardarropas vacio al usuario
         usuario.agregrarGuardarropa(guardarropa);
 
         //Valido que el guardarropa esta vacio
-        Assert.assertTrue(usuario.getGuardarropas().get(0).getPrendas().isEmpty());
+        Assertions.assertTrue(usuario.getGuardarropas().get(0).getPrendas().isEmpty());
 
         usuario.ejecutarSugerencia(sugerenciaAlta);
 
         //Valido que el guardarropa tiene una prenda
-        Assert.assertEquals(usuario.getGuardarropas().get(0).getPrendas().get(0) ,prenda);
+        Assertions.assertEquals(usuario.getGuardarropas().get(0).getPrendas().get(0) ,prenda);
 
         usuario.reversarSugerencia(sugerenciaAlta);
 
         // Valido que esta de nuevo vacio
-        Assert.assertTrue(usuario.getGuardarropas().get(0).getPrendas().isEmpty());
+        Assertions.assertTrue(usuario.getGuardarropas().get(0).getPrendas().isEmpty());
 
     }
 }

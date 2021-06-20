@@ -1,13 +1,13 @@
 package qmp.model;
 
-import qmp.api.AccuWeatherAPI;
+import qmp.api.MockAccuWeatherAPI;
 
 import java.util.List;
 import java.util.Map;
 
 public class AccuWeather implements Clima {
 
-    private AccuWeatherAPI apiClima = new AccuWeatherAPI();
+    private MockAccuWeatherAPI apiClima = new MockAccuWeatherAPI();
     private List<Map<String, Object>> condicionesClimaticas;
 
     @Override
