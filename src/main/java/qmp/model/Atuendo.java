@@ -16,7 +16,7 @@ public class Atuendo implements Observable {
     }
 
     public EstadoClima getClima(@NotNull String ciudad) {
-        return this.clima.getWeather(ciudad);
+        return this.clima.obtenerEstadoDeClima(ciudad);
     }
 
     @Override

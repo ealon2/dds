@@ -1,5 +1,5 @@
 package qmp.model;
 
 public interface Clima {
-    EstadoClima getWeather(String city);
+    EstadoClima obtenerEstadoDeClima(String city);
 }
