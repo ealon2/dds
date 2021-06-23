@@ -1,23 +1,25 @@
-package qmp.api;
+package qmp.service;
 
 import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.ClientResponse;
+import qmp.api.WeatherAPI;
+import qmp.api.dto.ClimaDTO;
+
 import javax.ws.rs.core.MediaType;
 
-public final class AccuWeatherAPI implements WeatherAPI {
+// Adapter de WeatherAPI
+public class ClimaService implements WeatherAPI {
 
     private static final String URL_DOMAIN = "http://dataservice.accuweather.com/";
     private static final String URL_PATH = "currentconditions/v1/";
     private static final Client client = Client.create();
 
-    @Override
-    public final ClientResponse getWeather(String ciudad){
+
+    public ClimaDTO obtenerEstadoDelClima(String ciudad){
         return client
             .resource(URL_DOMAIN)
             .path(URL_PATH)
             .queryParam("city",ciudad)
             .accept(MediaType.APPLICATION_JSON)
-            .get(ClientResponse.class);
+            .get(ClimaDTO.class);
     }
-
 }
