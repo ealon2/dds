@@ -3,7 +3,7 @@ import qmp.model.Categoria;
 
 public abstract class TipoDePrenda {
 
-    Categoria categoria;
+    private Categoria categoria;
     public abstract void validarCategoria(Categoria categoria);
 
     public TipoDePrenda(Categoria categoria){

@@ -1,6 +1,6 @@
 package qmp.api.dto;
 
-public class ClimaDTO {
+public class EstadoDelClimaDTO {
 
   private String DateTime;
   private Long EpochDateTime;

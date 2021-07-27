@@ -1,88 +1,36 @@
 package qmp.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.sun.istack.internal.NotNull;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class Usuario implements Observer {
+public class Usuario{
 
     private String ciudad;
-    private List<Guardarropa> guardarropas;
-    private List<SugerenciaCommand> sugerencias;
+    private List<Guardarropas> guardarropas;
 
-    /**
-     *
-     * @param ciudad
-     */
-    Usuario(@JsonProperty("ciudad") String ciudad){
+    Usuario(String ciudad){
         this.ciudad = ciudad;
-        this.guardarropas = new ArrayList<Guardarropa>();
-        this.sugerencias = new ArrayList<SugerenciaCommand>();
+        this.guardarropas = new ArrayList<Guardarropas>();
     }
 
-    /**
-     *
-     * @param sugerencia
-     */
-    @Override
-    public void escucharSugerencias(@NotNull SugerenciaCommand sugerencia) {
-        this.sugerencias.add(sugerencia);
+    public void agregrarGuardarropas(Guardarropas guardarropas) {
+        this.guardarropas.add(guardarropas);
     }
 
-    /**
-     *
-     * @param guardarropa
-     */
-    public void agregrarGuardarropa(@NotNull Guardarropa guardarropa) {
-        this.guardarropas.add(guardarropa);
+    public void quitarGuardarropas(Guardarropas guardarropas) {
+        this.guardarropas.remove(guardarropas);
     }
 
-    /**
-     *
-     * @param sugerencia
-     */
-    public void ejecutarSugerencia(@NotNull SugerenciaCommand sugerencia){
-        sugerencia.execute();
+    public void compartirCon(Usuario usuario, Guardarropas guardarropas){
+        usuario.agregrarGuardarropas(guardarropas);
     }
 
-    /**
-     *
-     * @param sugerencia
-     */
-    public void reversarSugerencia(@NotNull SugerenciaCommand sugerencia){
-        sugerencia.unexecute();
-    }
-
-    /**
-     *
-     * @param sugerencia
-     */
-    public void rechazarSugerencia(@NotNull SugerenciaCommand sugerencia){
-       this.sugerencias.remove(sugerencia);
-    }
-
-
-    /**
-     *
-     * @param usuario
-     * @param guardarropa
-     */
-    public void compartirCon(@NotNull Usuario usuario, @NotNull Guardarropa guardarropa){
-        usuario.agregrarGuardarropa(guardarropa);
-    }
-
-    public List<Guardarropa> getGuardarropas() {
+    public List<Guardarropas> getGuardarropas() {
         return guardarropas;
     }
 
     public String getCiudad() {
         return ciudad;
-    }
-
-    public List<SugerenciaCommand> getSugerencias(){
-        return sugerencias;
     }
 
 }

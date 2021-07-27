@@ -2,7 +2,7 @@ package qmp.service;
 
 import com.sun.jersey.api.client.Client;
 import qmp.api.WeatherAPI;
-import qmp.api.dto.ClimaDTO;
+import qmp.api.dto.EstadoDelClimaDTO;
 
 import javax.ws.rs.core.MediaType;
 
@@ -14,12 +14,12 @@ public class ClimaService implements WeatherAPI {
     private static final Client client = Client.create();
 
 
-    public ClimaDTO obtenerEstadoDelClima(String ciudad){
+    public EstadoDelClimaDTO obtenerEstadoDelClima(String ciudad){
         return client
             .resource(URL_DOMAIN)
             .path(URL_PATH)
             .queryParam("city",ciudad)
             .accept(MediaType.APPLICATION_JSON)
-            .get(ClimaDTO.class);
+            .get(EstadoDelClimaDTO.class);
     }
 }

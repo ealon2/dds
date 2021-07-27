@@ -1,22 +1,20 @@
 package qmp.model;
 
-public class AgregarPrenda implements SugerenciaCommand{
+public class AgregarPrenda implements Sugerencia {
 
     private final Prenda prenda;
-    private final Guardarropa guardarropa;
 
-    public AgregarPrenda(Prenda prenda, Guardarropa guardarropa){
-        this.guardarropa=guardarropa;
+    public AgregarPrenda(Prenda prenda){
         this.prenda = prenda;
     }
 
     @Override
-    public void execute(){
-        this.guardarropa.agregarPrenda(prenda);
+    public void ejectuar(Guardarropas guardarropas){
+        guardarropas.agregarPrenda(prenda);
     }
 
     @Override
-    public void unexecute(){
-        this.guardarropa.quitarPrenda(prenda);
+    public void reversar(Guardarropas guardarropas){
+        guardarropas.quitarPrenda(prenda);
     }
 }

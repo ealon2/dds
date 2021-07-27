@@ -1,5 +1,7 @@
 package qmp.api;
 
+import qmp.api.dto.EstadoDelClimaDTO;
+
 public interface WeatherAPI {
-  Object obtenerEstadoDelClima(String city);
+  EstadoDelClimaDTO obtenerEstadoDelClima(String city);
 }
