@@ -1,5 +1,4 @@
 package qmp.model;
-import qmp.model.Categoria;
 
 public abstract class TipoDePrenda {
 

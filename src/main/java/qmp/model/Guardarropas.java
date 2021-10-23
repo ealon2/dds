@@ -1,17 +1,23 @@
 package qmp.model;
 
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import qmp.persistence.PersistenceId;
+
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
-/**
- * @author ealon2
- * @version 1.0
- * @throws RuntimeException Se lanza esta excepcion ante cualquier eventual error.
- */
-public class Guardarropas {
+@Entity
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class Guardarropas extends PersistenceId {
 
-    private List<Prenda> prendas; // listado de prendas aceptadas
+    @OneToMany
+    private List<Prenda> prendas;
+
+    @Transient
     private List<Sugerencia> sugerencias;
 
     public Guardarropas(){
@@ -26,6 +32,7 @@ public class Guardarropas {
     public void reversarSugerencia(Sugerencia sugerencia){
         sugerencia.reversar(this);
     }
+
     public void agregarPrenda(Prenda prenda) {
         this.prendas.add(prenda);
     }
@@ -34,6 +41,7 @@ public class Guardarropas {
         this.prendas.remove(prenda);
     }
 
+    @JsonAnyGetter
     public List<Prenda> getPrendas(){
         return prendas;
     }
@@ -42,6 +50,7 @@ public class Guardarropas {
         return new ArrayList<>();
     }
 
+    @JsonAnyGetter
     public List<Sugerencia> obtenerSugerencias() {
         return sugerencias;
     }
@@ -56,5 +65,13 @@ public class Guardarropas {
 
     public List<Prenda> obtenerPrendas() {
         return prendas;
+    }
+
+    @Override
+    public String toString() {
+        return "{"
+            + '"' + "id" + '"' + ": " + this.getId() + ','
+            + '"' + "prendas" + '"' + ": " + this.getPrendas()
+            + "}";
     }
 }

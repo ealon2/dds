@@ -1,15 +1,27 @@
 package qmp.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.w3c.dom.css.RGBColor;
+import qmp.persistence.PersistenceId;
+
+import javax.persistence.Entity;
+import javax.persistence.Transient;
 
 import static java.util.Objects.requireNonNull;
 
-public class Prenda{
+@Entity
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class Prenda extends PersistenceId {
 
+    @Transient
     private RGBColor color;
+    @Transient
     private Material material;
+    @Transient
     private TipoDePrenda tipoDePrenda;
+    @Transient
     private RGBColor colorSecundario;
+    @Transient
     private Trama trama;
 
     public Prenda (RGBColor color, Material material, TipoDePrenda tipoDePrenda, Trama trama){
@@ -31,4 +43,15 @@ public class Prenda{
         return this.tipoDePrenda.getCategoria();
     }
 
+    @Override
+    public String toString() {
+        return "{"
+            + '"' + "id" + '"' + ": " + id + ','
+            + '"' + "material" + '"' + ": " + material + ','
+            + '"' + "tipo" + '"' + ": " + tipoDePrenda + ','
+            + '"' + "color" + '"' + ": " + color + ','
+            + '"' + "colorSecundario" + '"' + ": " + colorSecundario + ','
+            + '"' + "trama" + '"' + ": " + trama
+            + "}";
+    }
 }
